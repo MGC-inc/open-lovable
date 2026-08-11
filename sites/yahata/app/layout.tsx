@@ -47,15 +47,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* Loaded the way the original site loaded it, rather than through next/font,
+            so the rendered typography stays identical. Switching to next/font would
+            self-host the files and drop this third-party request — a worthwhile change,
+            but one to make deliberately rather than as a side effect. */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@500&display=swap"
           rel="stylesheet"
         />
-        {/* The original hand-authored stylesheet, served verbatim from /public so that
-            its relative url(../img/…) and url(../fonts/…) references keep resolving. */}
+        {/* These two are deliberately plain <link> tags rather than imported stylesheets.
+            style.css is the original, unmodified file served from /public: importing it
+            would let the bundler rewrite its relative url(../img/…) and url(../fonts/…)
+            references, which is exactly what must not happen. */}
+        {/* eslint-disable @next/next/no-css-tags */}
         <link rel="stylesheet" href="/assets/css/style.css" />
         {/* Small additions for the behaviours that used to come from jQuery plugins. */}
         <link rel="stylesheet" href="/assets/css/site.css" />
+        {/* eslint-enable @next/next/no-css-tags */}
       </head>
       <body id="page" className="l-page">
         <Loader />
