@@ -1,0 +1,56 @@
+.btn_group {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  gap: 30px;
+}
+@media screen and (max-width: 768px) {
+  .btn_group {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.btn_group .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  height: 80px;
+  text-align: center;
+  transition: 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .btn_group .btn {
+    width: 100%;
+  }
+}
+.btn_group .btn strong {
+  font-size: 1.5em;
+}
+.btn_group .btn:first-child {
+  background-color: #07824b;
+  color: #fff;
+  border: 3px solid #07824b;
+}
+.btn_group .btn:first-child:hover {
+  background-color: #fff;
+  color: #07824b;
+}
+.btn_group .btn:last-child {
+  border: 3px solid #07824b;
+}
+.btn_group .btn:last-child:hover {
+  background-color: #07824b;
+  color: #fff;
+}
+
+.c-form__row small {
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.c-form__ttl span i {
+  color: #f00;
+  font-style: normal;
+}/*# sourceMappingURL=include.css.map */

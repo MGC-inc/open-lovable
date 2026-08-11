@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+/* --------------------------------------------------------------------------
+   Additions on top of the original style.css.
+
+   style.css is kept byte-for-byte as authored, so anything that used to be
+   supplied by a jQuery plugin at runtime (slick's inline styles, the slideout
+   drawer, the back-to-top anchor) gets its handful of rules here instead.
+   -------------------------------------------------------------------------- */
+
+/* --- Key visual slider ---------------------------------------------------
+   slick used to stack the fade slides with inline styles. The same effect,
+   with the same class names the stylesheet already animates against. */
+.p-kv__slider.slick-slider {
+  display: grid;
+  list-style: none;
+  /* Own stacking context, so the slide z-indexes below stay inside the hero
+     and never paint over the header or the open navigation drawer. */
+  position: relative;
+  z-index: 0;
+}
+
+.p-kv__slider > .slick-slide {
+  grid-area: 1 / 1;
+  float: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  z-index: 800;
+  transition: opacity 1s ease;
+}
+
+.p-kv__slider > .slick-slide.slick-current {
+  opacity: 1;
+  z-index: 900;
+}
+
+.p-kv__slider > .slick-slide.is-prev {
+  opacity: 0;
+  z-index: 850;
+}
+
+/* Slides that are not on screen must not swallow clicks on the one that is. */
+.p-kv__slider > .slick-slide:not(.slick-current) {
+  pointer-events: none;
+}
+
+/* --- Buttons that replace anchors ---------------------------------------- */
+.c-totop {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* --- Drawer --------------------------------------------------------------
+   The panel is a plain overlay; it only needs to sit under the drawer. */
+.slideout-panel {
+  border: 0;
+}
+
+/* --- Accordion (recruit job listings) ------------------------------------ */
+.js-accordion {
+  cursor: pointer;
+}
+
+.p-panel_requirement__body.is-open {
+  display: block;
+}
+
+/* --- Contact form --------------------------------------------------------- */
+.c-form__error {
+  display: block;
+  margin-top: 0.5em;
+  color: #c11;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.c-form__note {
+  margin-bottom: 2em;
+  line-height: 1.8;
+}
+
+/* --- Opening splash -------------------------------------------------------
+   The original markup carried these rules inline on #js-loader. */
+#js-loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  text-align: center;
+  z-index: 99999;
+  opacity: 1;
+  background: url("../img/common/loading_bg.png") no-repeat center center / cover, #fff;
+  transition: opacity 0.4s ease;
+}
+
+#js-loader.is-fading {
+  opacity: 0;
+}
